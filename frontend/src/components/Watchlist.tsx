@@ -59,24 +59,24 @@ export default function Watchlist({ onSelectTicker }: { onSelectTicker: (ticker:
     }
   };
 
-  if (loading) return <div className="text-gray-500 text-xs">Loading watchlist...</div>;
-  if (items.length === 0) return <div className="text-gray-500 text-xs italic">Watchlist is empty.</div>;
+  if (loading) return <div className="text-slate-400 text-xs font-medium p-4 text-center">Loading watchlist...</div>;
+  if (items.length === 0) return <div className="text-slate-400 text-xs font-medium italic p-4 text-center">Your watchlist is empty.</div>;
 
   return (
-    <ul className="flex flex-col gap-2">
-      {items.map(item => (
+    <ul className="flex flex-col">
+      {items.map((item, index) => (
         <li 
           key={item.id} 
           onClick={() => onSelectTicker(item.symbol)}
-          className="flex justify-between items-center bg-surface border border-border p-2 cursor-pointer hover:border-gray-500 transition-colors group"
+          className={`flex justify-between items-center p-4 cursor-pointer hover:bg-slate-50 transition-colors group ${index !== items.length - 1 ? 'border-b border-slate-100' : ''}`}
         >
-          <span className="font-bold text-white text-sm">{item.symbol}</span>
+          <span className="font-bold text-slate-800 text-sm tracking-wide">{item.symbol}</span>
           <button 
             onClick={(e) => removeItem(item.id, e)} 
-            className="text-gray-600 hover:text-accent-down opacity-0 group-hover:opacity-100 transition-opacity"
+            className="text-slate-300 hover:text-red-500 hover:bg-red-50 p-1.5 rounded-md opacity-0 group-hover:opacity-100 transition-all"
             title="Remove from watchlist"
           >
-            <Trash2 size={14} />
+            <Trash2 size={16} />
           </button>
         </li>
       ))}

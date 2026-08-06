@@ -70,7 +70,6 @@ export default function Home() {
         symbol: data.ticker
       });
       if (error) throw error;
-      // Simple notification
       alert(`Added ${data.ticker} to Watchlist`);
     } catch (err) {
       console.error(err);
@@ -79,34 +78,47 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-1 w-full bg-background overflow-hidden">
+    <div className="flex flex-1 w-full bg-background overflow-hidden font-sans">
       {/* Sidebar for Auth & Watchlist */}
-      <div className="w-80 border-r border-border bg-surface p-6 flex flex-col h-full overflow-y-auto shrink-0 hidden md:flex">
+      <div className="w-[340px] bg-white/60 backdrop-blur-md border-r border-slate-200/60 p-6 flex flex-col h-full overflow-y-auto shrink-0 hidden md:flex shadow-soft z-10">
         <div className="mb-8">
-          <h1 className="text-2xl font-bold tracking-tight text-white mb-1">FinPulse AI</h1>
-          <p className="text-xs text-gray-500">Prospective Financial Intelligence</p>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900 mb-1 flex items-center gap-2">
+            <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-blue-700 flex items-center justify-center text-white text-sm shadow-sm shadow-blue-500/20">F</span>
+            FinPulse AI
+          </h1>
+          <p className="text-[11px] text-slate-500 font-semibold uppercase tracking-widest mt-2 ml-10">Intelligence</p>
         </div>
         
         {authLoading ? (
-          <div className="flex items-center gap-2 text-gray-500 text-sm">
-            <Loader2 className="w-4 h-4 animate-spin" /> Checking Session...
+          <div className="flex flex-col items-center justify-center h-40 gap-3 text-primary text-sm font-medium">
+            <Loader2 className="w-6 h-6 animate-spin" /> 
+            <span>Loading Session...</span>
           </div>
         ) : !user ? (
-          <Auth onAuthSuccess={() => {}} />
+          <div className="animate-in fade-in duration-500">
+            <Auth onAuthSuccess={() => {}} />
+          </div>
         ) : (
-          <div className="flex flex-col h-full">
-            <div className="flex items-center justify-between mb-6 bg-background border border-border p-3">
-              <div className="flex items-center gap-2 overflow-hidden">
-                <UserIcon className="w-4 h-4 text-gray-400 shrink-0" />
-                <span className="text-xs text-gray-300 truncate" title={user.email}>{user.email}</span>
+          <div className="flex flex-col h-full animate-in fade-in duration-500">
+            <div className="flex items-center justify-between mb-8 bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
+              <div className="flex items-center gap-3 overflow-hidden">
+                <div className="bg-blue-50 p-2.5 rounded-xl text-primary">
+                  <UserIcon className="w-5 h-5" />
+                </div>
+                <div className="flex flex-col overflow-hidden">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Logged In</span>
+                  <span className="text-xs font-semibold text-slate-700 truncate" title={user.email}>{user.email}</span>
+                </div>
               </div>
-              <button onClick={handleSignOut} className="text-gray-500 hover:text-white shrink-0" title="Sign Out">
+              <button onClick={handleSignOut} className="p-2.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-colors shrink-0" title="Sign Out">
                 <LogOut className="w-4 h-4" />
               </button>
             </div>
             
-            <h3 className="text-sm font-bold text-gray-400 mb-3 border-b border-border pb-2">YOUR WATCHLIST</h3>
-            <div className="flex-grow">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-xs font-bold text-slate-400 tracking-widest uppercase">Your Watchlist</h3>
+            </div>
+            <div className="flex-grow bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
               <Watchlist onSelectTicker={(t) => handleSearch(undefined, t)} />
             </div>
           </div>
@@ -114,19 +126,22 @@ export default function Home() {
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 p-4 md:p-8 flex flex-col h-full overflow-y-auto">
+      <div className="flex-1 p-4 md:p-10 flex flex-col h-full overflow-y-auto">
         <div className="w-full max-w-5xl mx-auto">
           {/* Header & Search */}
-          <div className="w-full flex justify-between items-center mb-8 border-b border-border pb-4">
-            <h1 className="text-xl font-bold md:hidden text-white">FinPulse AI</h1>
-            <form onSubmit={(e) => handleSearch(e)} className="relative w-full max-w-md flex items-center ml-auto">
-              <Search className="absolute left-3 text-gray-500 h-4 w-4" />
+          <div className="w-full flex justify-between items-center mb-10">
+            <h1 className="text-2xl font-bold md:hidden text-slate-900 flex items-center gap-2">
+              <span className="w-6 h-6 rounded-md bg-gradient-to-br from-primary to-blue-700 flex items-center justify-center text-white text-xs shadow-sm">F</span>
+              FinPulse
+            </h1>
+            <form onSubmit={(e) => handleSearch(e)} className="relative w-full max-w-xl flex items-center ml-auto shadow-sm group">
+              <Search className="absolute left-5 text-slate-400 h-5 w-5 group-focus-within:text-primary transition-colors" />
               <input 
                 type="text" 
-                placeholder="SEARCH TICKER (e.g. TSLA)" 
+                placeholder="Search for a ticker (e.g. TSLA, NVDA)" 
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
-                className="bg-surface border border-border text-white pl-10 pr-4 py-2 w-full focus:outline-none focus:border-gray-500 transition-colors uppercase text-sm"
+                className="bg-white border border-slate-200 text-slate-800 pl-14 pr-4 py-4 rounded-2xl w-full focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-400 transition-all font-medium placeholder:font-normal placeholder:text-slate-400"
               />
               <button type="submit" className="hidden">Search</button>
             </form>
@@ -134,74 +149,93 @@ export default function Home() {
 
           {/* Error Boundary / Messages */}
           {error && (
-            <div className="bg-red-950 border border-red-900 text-red-200 p-4 mb-4 text-sm">
+            <div className="bg-red-50 border border-red-200 text-red-600 p-4 rounded-2xl mb-6 text-sm font-medium flex items-center gap-3 shadow-sm animate-in fade-in slide-in-from-top-4">
+              <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
               {error}
             </div>
           )}
 
           {/* Content */}
           {loading ? (
-            <div className="h-96 w-full border border-border bg-surface flex flex-col items-center justify-center text-gray-500">
-              <Loader2 className="h-8 w-8 animate-spin mb-4 text-gray-400" />
-              <p className="text-sm">Running ONNX Inference for {ticker}...</p>
+            <div className="h-[500px] w-full bg-white/50 backdrop-blur-sm border border-slate-200 rounded-3xl shadow-sm flex flex-col items-center justify-center text-slate-500">
+              <div className="relative mb-6">
+                <Loader2 className="h-12 w-12 animate-spin text-primary/20" />
+                <Loader2 className="h-12 w-12 animate-spin text-primary absolute top-0 left-0" style={{ animationDirection: 'reverse', animationDuration: '2s' }} />
+              </div>
+              <p className="text-sm font-semibold tracking-wide">Running Neural Network Inference...</p>
             </div>
           ) : data ? (
-            <div className="animate-in fade-in duration-500 pb-16">
-              <div className="flex justify-between items-end mb-4">
-                <div>
-                  <h2 className="text-2xl font-bold text-white flex items-center gap-3">
-                    {data.ticker} Forecast
-                    {user && (
-                      <button 
-                        onClick={addToWatchlist}
-                        className="text-xs bg-surface border border-border hover:bg-gray-800 text-white px-2 py-1 flex items-center gap-1 font-normal transition-colors"
-                        title="Add to Watchlist"
-                      >
-                        <Plus className="w-3 h-3" /> ADD
-                      </button>
-                    )}
-                  </h2>
-                  <p className="text-xs text-gray-500 mt-1">Model: {data.model_used}</p>
+            <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 pb-16">
+              
+              <div className="bg-white rounded-3xl border border-slate-200 shadow-card p-6 md:p-8 mb-8">
+                <div className="flex justify-between items-start mb-8">
+                  <div>
+                    <h2 className="text-4xl font-bold text-slate-900 flex items-center gap-4 tracking-tight">
+                      {data.ticker}
+                      <span className="text-2xl text-slate-400 font-medium tracking-normal">Forecast</span>
+                      {user && (
+                        <button 
+                          onClick={addToWatchlist}
+                          className="text-xs bg-slate-50 border border-slate-200 hover:bg-blue-50 hover:text-primary hover:border-blue-200 text-slate-600 px-3 py-2 rounded-xl flex items-center gap-1.5 font-semibold transition-all shadow-sm ml-2"
+                          title="Add to Watchlist"
+                        >
+                          <Plus className="w-3.5 h-3.5" /> Save
+                        </button>
+                      )}
+                    </h2>
+                    <div className="flex items-center gap-2 mt-4">
+                      <span className="px-3 py-1.5 rounded-lg bg-blue-50 text-blue-700 text-xs font-bold tracking-wider">
+                        {data.model_used}
+                      </span>
+                      <span className="text-xs font-semibold text-slate-500 bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-lg">ONNX Runtime</span>
+                    </div>
+                  </div>
+                  <div className="text-right bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                    <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Volatility</p>
+                    <p className="font-sans font-bold text-slate-900 text-3xl">{(data.metrics.historical_volatility * 100).toFixed(2)}<span className="text-slate-400 text-xl font-semibold">%</span></p>
+                  </div>
                 </div>
-                <div className="text-right">
-                  <p className="text-xs text-gray-500">Historical Volatility</p>
-                  <p className="font-mono text-white text-lg">{(data.metrics.historical_volatility * 100).toFixed(2)}%</p>
-                </div>
+                
+                <ChartVisualizer data={data.data} />
               </div>
               
-              <ChartVisualizer data={data.data} />
-              
               {/* Raw Data Table */}
-              <div className="mt-8">
-                <h3 className="text-sm font-bold text-gray-400 mb-2 border-b border-border pb-1">FORECAST MATRIX</h3>
+              <div className="bg-white rounded-3xl border border-slate-200 shadow-card p-6 md:p-8">
+                <h3 className="text-sm font-bold text-slate-800 mb-6 tracking-widest uppercase flex items-center gap-3">
+                  <div className="w-1.5 h-5 bg-primary rounded-full"></div>
+                  Forecast Matrix
+                </h3>
                 <div className="overflow-x-auto">
                   <table className="w-full text-left border-collapse text-sm">
                     <thead>
-                      <tr className="border-b border-border text-gray-500">
-                        <th className="py-2 pr-4 font-normal">DATE</th>
-                        <th className="py-2 pr-4 font-normal text-right">TARGET PRICE</th>
-                        <th className="py-2 pr-4 font-normal text-right">LOWER BOUND (-95%)</th>
-                        <th className="py-2 pr-4 font-normal text-right">UPPER BOUND (+95%)</th>
+                      <tr className="border-b-2 border-slate-100 text-slate-400">
+                        <th className="pb-4 pr-4 font-bold tracking-wide">Date</th>
+                        <th className="pb-4 pr-4 font-bold tracking-wide text-right">Target Price</th>
+                        <th className="pb-4 pr-4 font-bold tracking-wide text-right text-red-500/70">Lower Bound (-95%)</th>
+                        <th className="pb-4 pr-4 font-bold tracking-wide text-right text-green-500/80">Upper Bound (+95%)</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="font-medium">
                       {data.data.filter((d) => d.is_forecast).slice(0, 5).map((row, i) => (
-                        <tr key={i} className="border-b border-border hover:bg-surface">
-                          <td className="py-2 pr-4 text-gray-300">{row.date}</td>
-                          <td className="py-2 pr-4 text-right text-accent-line">${row.price.toFixed(2)}</td>
-                          <td className="py-2 pr-4 text-right text-accent-down">${row.lower_bound?.toFixed(2)}</td>
-                          <td className="py-2 pr-4 text-right text-gray-300">${row.upper_bound?.toFixed(2)}</td>
+                        <tr key={i} className="border-b border-slate-50 hover:bg-slate-50/80 transition-colors">
+                          <td className="py-4 pr-4 text-slate-600 font-semibold">{row.date}</td>
+                          <td className="py-4 pr-4 text-right text-slate-900 font-bold text-base">${row.price.toFixed(2)}</td>
+                          <td className="py-4 pr-4 text-right text-red-500/90">${row.lower_bound?.toFixed(2)}</td>
+                          <td className="py-4 pr-4 text-right text-green-600/90">${row.upper_bound?.toFixed(2)}</td>
                         </tr>
                       ))}
                     </tbody>
                   </table>
-                  <p className="text-xs text-gray-600 mt-2 text-right">Displaying first 5 horizons. Scroll for more data.</p>
+                  <p className="text-xs font-semibold text-slate-400 mt-6 text-center bg-slate-50/50 py-3 rounded-xl border border-slate-100 border-dashed">Displaying first 5 horizons. Scroll or export for more data.</p>
                 </div>
               </div>
             </div>
           ) : (
-            <div className="h-96 w-full border border-border bg-surface flex flex-col items-center justify-center text-gray-500 text-sm">
-              <p>Enter a ticker symbol above to generate a forecast.</p>
+            <div className="h-[500px] w-full bg-white/40 backdrop-blur-sm border border-slate-200 border-dashed rounded-3xl flex flex-col items-center justify-center text-slate-400 shadow-sm">
+              <div className="bg-white p-5 rounded-full mb-5 shadow-sm border border-slate-100">
+                <Search className="w-8 h-8 text-blue-300" />
+              </div>
+              <p className="text-sm font-semibold text-slate-500 tracking-wide">Search a ticker above to begin analysis.</p>
             </div>
           )}
         </div>

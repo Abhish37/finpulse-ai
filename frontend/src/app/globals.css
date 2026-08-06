@@ -1,24 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   body {
-    @apply bg-background text-gray-200 font-mono antialiased;
+    @apply bg-background text-slate-800 font-sans antialiased;
+    /* Soft white/blue radial gradient background */
+    background-image: radial-gradient(circle at 50% 0%, #E0F2FE 0%, #F8FAFC 50%);
+    background-attachment: fixed;
   }
 }
 
-/* Scrollbar for terminal feel */
+/* Modern clean scrollbars */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0A0A0A;
+  background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #333333;
+  background: #CBD5E1;
+  border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #555555;
+  background: #94A3B8;
 }
