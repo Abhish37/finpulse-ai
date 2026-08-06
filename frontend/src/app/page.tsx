@@ -118,9 +118,10 @@ export default function Home() {
       });
       if (error) throw error;
       alert(`Added ${data.ticker} to Watchlist`);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error(err);
-      alert(`Failed to add to watchlist: ${err.message || 'Unknown error'}`);
+      const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+      alert(`Failed to add to watchlist: ${errorMessage}`);
     }
   };
 
