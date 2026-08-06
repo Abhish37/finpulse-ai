@@ -118,9 +118,9 @@ export default function Home() {
       });
       if (error) throw error;
       alert(`Added ${data.ticker} to Watchlist`);
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
-      alert("Failed to add to watchlist. It might already be there.");
+      alert(`Failed to add to watchlist: ${err.message || 'Unknown error'}`);
     }
   };
 
