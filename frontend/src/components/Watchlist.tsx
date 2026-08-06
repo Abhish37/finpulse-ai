@@ -59,8 +59,8 @@ export default function Watchlist({ onSelectTicker }: { onSelectTicker: (ticker:
     }
   };
 
-  if (loading) return <div className="text-gray-500 text-[10px] font-mono p-4 text-center tracking-widest uppercase">Syncing...</div>;
-  if (items.length === 0) return <div className="text-gray-500 text-[10px] font-mono p-4 text-center tracking-widest uppercase">No assets monitored</div>;
+  if (loading) return <div className="text-slate-400 text-[10px] font-mono p-4 text-center tracking-widest uppercase font-semibold">Syncing...</div>;
+  if (items.length === 0) return <div className="text-slate-400 text-[10px] font-mono p-4 text-center tracking-widest uppercase font-semibold">No assets monitored</div>;
 
   return (
     <ul className="flex flex-col">
@@ -68,15 +68,15 @@ export default function Watchlist({ onSelectTicker }: { onSelectTicker: (ticker:
         <li 
           key={item.id} 
           onClick={() => onSelectTicker(item.symbol)}
-          className={`flex justify-between items-center p-4 cursor-pointer hover:bg-border/50 transition-colors group ${index !== items.length - 1 ? 'border-b border-border' : ''}`}
+          className={`flex justify-between items-center p-4 cursor-pointer hover:bg-slate-50 transition-colors group ${index !== items.length - 1 ? 'border-b border-slate-100' : ''}`}
         >
-          <span className="font-bold text-white text-sm font-mono tracking-widest">{item.symbol}</span>
+          <span className="font-bold text-slate-800 text-sm font-mono tracking-widest">{item.symbol}</span>
           <button 
             onClick={(e) => removeItem(item.id, e)} 
-            className="text-gray-600 hover:text-red-500 hover:bg-red-500/10 p-1.5 rounded opacity-0 group-hover:opacity-100 transition-all"
+            className="text-slate-300 hover:text-rose-500 hover:bg-rose-50 p-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-all"
             title="Remove from watchlist"
           >
-            <Trash2 size={14} />
+            <Trash2 size={16} />
           </button>
         </li>
       ))}

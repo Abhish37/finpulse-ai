@@ -114,19 +114,19 @@ export default function Home() {
   const formatPercent = (val: number) => `${(val * 100).toFixed(1)}%`;
 
   return (
-    <div className="flex flex-1 w-full bg-background overflow-hidden font-sans text-gray-200">
+    <div className="flex flex-1 w-full bg-transparent overflow-hidden font-sans text-slate-800">
       {/* Sidebar for Auth & Watchlist */}
-      <div className="w-[340px] bg-surface border-r border-border p-6 flex flex-col h-full overflow-y-auto shrink-0 hidden md:flex z-10">
+      <div className="w-[340px] bg-white/60 backdrop-blur-md border-r border-slate-200 p-6 flex flex-col h-full overflow-y-auto shrink-0 hidden md:flex z-10 shadow-sm">
         <div className="mb-8">
-          <h1 className="text-2xl font-bold tracking-tight text-white mb-1 flex items-center gap-2">
-            <span className="w-8 h-8 rounded bg-primary flex items-center justify-center text-background text-sm font-bold">F</span>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-800 mb-1 flex items-center gap-2">
+            <span className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white text-sm font-bold shadow-md">F</span>
             FinPulse AI
           </h1>
-          <p className="text-[11px] text-gray-500 font-mono uppercase tracking-widest mt-2 ml-10">Terminal v1.0</p>
+          <p className="text-[11px] text-slate-500 font-mono uppercase tracking-widest mt-2 ml-10">Terminal v1.0</p>
         </div>
         
         {authLoading ? (
-          <div className="flex flex-col items-center justify-center h-40 gap-3 text-primary text-sm font-mono">
+          <div className="flex flex-col items-center justify-center h-40 gap-3 text-blue-500 text-sm font-mono">
             <Loader2 className="w-6 h-6 animate-spin" /> 
             <span>AUTH_INIT...</span>
           </div>
@@ -136,25 +136,25 @@ export default function Home() {
           </div>
         ) : (
           <div className="flex flex-col h-full animate-in fade-in duration-500">
-            <div className="flex items-center justify-between mb-8 bg-[#1A2332] border border-border rounded p-3">
+            <div className="flex items-center justify-between mb-8 bg-white border border-slate-200 rounded-xl p-3 shadow-sm">
               <div className="flex items-center gap-3 overflow-hidden">
-                <div className="bg-primary/20 p-2 rounded text-primary">
+                <div className="bg-blue-50 p-2 rounded-lg text-blue-600">
                   <UserIcon className="w-4 h-4" />
                 </div>
                 <div className="flex flex-col overflow-hidden">
-                  <span className="text-[10px] font-mono text-gray-500 uppercase tracking-widest">Operator</span>
-                  <span className="text-xs font-semibold text-gray-300 truncate" title={user.email}>{user.email}</span>
+                  <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest">Operator</span>
+                  <span className="text-xs font-semibold text-slate-700 truncate" title={user.email}>{user.email}</span>
                 </div>
               </div>
-              <button onClick={handleSignOut} className="p-2 text-gray-500 hover:text-red-500 hover:bg-red-500/10 rounded transition-colors shrink-0" title="Sign Out">
+              <button onClick={handleSignOut} className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors shrink-0" title="Sign Out">
                 <LogOut className="w-4 h-4" />
               </button>
             </div>
             
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-[10px] font-mono text-gray-500 tracking-widest uppercase">Active Watchlist</h3>
+              <h3 className="text-[10px] font-mono text-slate-500 tracking-widest uppercase ml-1">Active Watchlist</h3>
             </div>
-            <div className="flex-grow bg-[#1A2332] rounded border border-border overflow-hidden">
+            <div className="flex-grow bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">
               <Watchlist onSelectTicker={(t) => handleSearch(undefined, t)} />
             </div>
           </div>
@@ -166,18 +166,18 @@ export default function Home() {
         <div className="w-full max-w-6xl mx-auto">
           {/* Header & Search */}
           <div className="w-full flex justify-between items-center mb-8">
-            <h1 className="text-xl font-bold md:hidden text-white flex items-center gap-2">
-              <span className="w-6 h-6 rounded bg-primary flex items-center justify-center text-background text-xs">F</span>
+            <h1 className="text-xl font-bold md:hidden text-slate-800 flex items-center gap-2">
+              <span className="w-6 h-6 rounded bg-blue-600 flex items-center justify-center text-white text-xs">F</span>
               FinPulse
             </h1>
-            <form onSubmit={(e) => handleSearch(e)} className="relative w-full max-w-xl flex items-center ml-auto group">
-              <Search className="absolute left-4 text-gray-500 h-4 w-4 group-focus-within:text-primary transition-colors" />
+            <form onSubmit={(e) => handleSearch(e)} className="relative w-full max-w-xl flex items-center ml-auto group shadow-sm rounded-xl">
+              <Search className="absolute left-4 text-slate-400 h-4 w-4 group-focus-within:text-blue-500 transition-colors" />
               <input 
                 type="text" 
                 placeholder="EXECUTE QUERY (e.g. AAPL)" 
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
-                className="bg-surface border border-border text-white pl-12 pr-4 py-3 rounded w-full focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all font-mono text-sm placeholder:text-gray-600 uppercase"
+                className="bg-white border border-slate-200 text-slate-800 pl-12 pr-4 py-3 rounded-xl w-full focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all font-mono text-sm placeholder:text-slate-400 uppercase shadow-sm"
               />
               <button type="submit" className="hidden">Search</button>
             </form>
@@ -185,7 +185,7 @@ export default function Home() {
 
           {/* Error Boundary / Messages */}
           {error && (
-            <div className="bg-red-500/10 border border-red-500/30 text-red-500 p-4 rounded mb-6 text-sm font-mono flex items-center gap-3 animate-in fade-in slide-in-from-top-4">
+            <div className="bg-red-50 border border-red-200 text-red-600 p-4 rounded-xl mb-6 text-sm font-mono flex items-center gap-3 animate-in fade-in slide-in-from-top-4 shadow-sm">
               <ShieldAlert className="w-4 h-4" />
               {error}
             </div>
@@ -193,106 +193,106 @@ export default function Home() {
 
           {/* Content */}
           {loading ? (
-            <div className="h-[500px] w-full bg-surface/50 border border-border border-dashed rounded flex flex-col items-center justify-center text-gray-500 font-mono">
-              <Loader2 className="h-8 w-8 animate-spin text-primary mb-4" />
+            <div className="h-[500px] w-full bg-white/50 backdrop-blur-sm border border-slate-200 border-dashed rounded-2xl flex flex-col items-center justify-center text-slate-500 font-mono shadow-sm">
+              <Loader2 className="h-8 w-8 animate-spin text-blue-500 mb-4" />
               <p className="text-xs tracking-widest uppercase">Executing Contract Inference for {ticker}...</p>
             </div>
           ) : data && data.contract ? (
             <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 pb-16">
               
               {/* FINPULSE DECISION CARD */}
-              <div className="bg-surface rounded border border-border p-6 mb-6">
+              <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-6">
                 
                 {/* Header Row */}
-                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 gap-4 border-b border-border pb-6">
+                <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center mb-8 gap-4 border-b border-slate-100 pb-6">
                   <div>
-                    <h2 className="text-3xl font-bold text-white flex items-center gap-3 tracking-tight">
+                    <h2 className="text-3xl font-bold text-slate-800 flex items-center gap-3 tracking-tight">
                       {data.ticker}
-                      <span className="text-xl text-gray-500 font-mono font-normal">| {data.contract.horizon.replace('_', ' ')}</span>
+                      <span className="text-xl text-slate-400 font-mono font-normal">| {data.contract.horizon.replace('_', ' ')}</span>
                       {user && (
                         <button 
                           onClick={addToWatchlist}
-                          className="text-[10px] uppercase font-mono bg-border hover:bg-primary/20 hover:text-primary text-gray-400 px-3 py-1.5 rounded flex items-center gap-1.5 transition-all ml-2"
+                          className="text-[10px] uppercase font-mono bg-slate-100 hover:bg-blue-50 hover:text-blue-600 text-slate-500 px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all ml-2 border border-slate-200"
                         >
                           <Plus className="w-3 h-3" /> Monitor
                         </button>
                       )}
                     </h2>
                     <div className="flex flex-wrap items-center gap-3 mt-3">
-                      <div className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-primary/10 text-primary border border-primary/20 text-[10px] font-mono uppercase tracking-wider">
-                        <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></div>
+                      <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-blue-50 text-blue-600 border border-blue-100 text-[10px] font-mono uppercase tracking-wider font-semibold">
+                        <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></div>
                         {data.contract.state.replace(/_/g, ' ')}
                       </div>
-                      <span className="text-[10px] font-mono text-gray-400 bg-background border border-border px-2 py-1 rounded">
+                      <span className="text-[10px] font-mono text-slate-500 bg-slate-50 border border-slate-200 px-2 py-1 rounded-md font-medium">
                         REGIME: {data.contract.regime.toUpperCase()}
                       </span>
-                      <span className="text-[10px] font-mono text-gray-500 border border-border px-2 py-1 rounded">
+                      <span className="text-[10px] font-mono text-slate-400 border border-slate-200 px-2 py-1 rounded-md">
                         {data.model_used}
                       </span>
                     </div>
                   </div>
                   
                   {/* Probability Distribution */}
-                  <div className="flex items-center gap-4 bg-background p-3 rounded border border-border">
-                    <div className="text-center px-3 border-r border-border">
-                      <p className="text-[10px] font-mono text-primary uppercase mb-1">P(Up)</p>
-                      <p className="font-mono text-xl text-white">{formatPercent(data.contract.probability_up)}</p>
+                  <div className="flex items-center gap-4 bg-slate-50 p-3 rounded-xl border border-slate-200 shadow-inner">
+                    <div className="text-center px-3 border-r border-slate-200">
+                      <p className="text-[10px] font-mono text-emerald-600 uppercase mb-1 font-semibold">P(Up)</p>
+                      <p className="font-mono text-xl text-slate-800 font-semibold">{formatPercent(data.contract.probability_up)}</p>
                     </div>
-                    <div className="text-center px-3 border-r border-border">
-                      <p className="text-[10px] font-mono text-gray-500 uppercase mb-1">P(Neutral)</p>
-                      <p className="font-mono text-xl text-white">{formatPercent(data.contract.probability_neutral)}</p>
+                    <div className="text-center px-3 border-r border-slate-200">
+                      <p className="text-[10px] font-mono text-slate-500 uppercase mb-1 font-semibold">P(Neutral)</p>
+                      <p className="font-mono text-xl text-slate-800 font-semibold">{formatPercent(data.contract.probability_neutral)}</p>
                     </div>
                     <div className="text-center px-3">
-                      <p className="text-[10px] font-mono text-red-500 uppercase mb-1">P(Down)</p>
-                      <p className="font-mono text-xl text-white">{formatPercent(data.contract.probability_down)}</p>
+                      <p className="text-[10px] font-mono text-rose-500 uppercase mb-1 font-semibold">P(Down)</p>
+                      <p className="font-mono text-xl text-slate-800 font-semibold">{formatPercent(data.contract.probability_down)}</p>
                     </div>
                   </div>
                 </div>
                 
                 {/* Metrics Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-                  <div className="bg-background border border-border p-4 rounded flex flex-col justify-center">
-                    <p className="text-[10px] text-gray-500 font-mono uppercase mb-2 flex items-center gap-1.5">
-                      <TrendingUp className="w-3 h-3 text-primary" /> Expected Return
+                  <div className="bg-white border border-slate-200 p-4 rounded-xl flex flex-col justify-center shadow-sm">
+                    <p className="text-[10px] text-slate-500 font-mono uppercase mb-2 flex items-center gap-1.5 font-semibold">
+                      <TrendingUp className="w-3 h-3 text-emerald-500" /> Expected Return
                     </p>
-                    <p className={`font-mono text-2xl ${data.contract.expected_return >= 0 ? 'text-primary' : 'text-red-500'}`}>
+                    <p className={`font-mono text-2xl font-bold ${data.contract.expected_return >= 0 ? 'text-emerald-600' : 'text-rose-600'}`}>
                       {data.contract.expected_return >= 0 ? '+' : ''}{formatPercent(data.contract.expected_return)}
                     </p>
                   </div>
                   
-                  <div className="bg-background border border-border p-4 rounded flex flex-col justify-center">
-                    <p className="text-[10px] text-gray-500 font-mono uppercase mb-2 flex items-center gap-1.5">
-                      <Info className="w-3 h-3 text-gray-400" /> 80% Pred. Interval
+                  <div className="bg-white border border-slate-200 p-4 rounded-xl flex flex-col justify-center shadow-sm">
+                    <p className="text-[10px] text-slate-500 font-mono uppercase mb-2 flex items-center gap-1.5 font-semibold">
+                      <Info className="w-3 h-3 text-blue-400" /> 80% Pred. Interval
                     </p>
-                    <p className="font-mono text-lg text-white">
+                    <p className="font-mono text-lg text-slate-700 font-semibold">
                       ${data.contract.prediction_interval_80[0].toFixed(2)} - ${data.contract.prediction_interval_80[1].toFixed(2)}
                     </p>
                   </div>
                   
-                  <div className="bg-red-500/5 border border-red-500/20 p-4 rounded flex flex-col justify-center">
-                    <p className="text-[10px] text-red-400 font-mono uppercase mb-2 flex items-center gap-1.5">
+                  <div className="bg-rose-50 border border-rose-100 p-4 rounded-xl flex flex-col justify-center shadow-sm">
+                    <p className="text-[10px] text-rose-500 font-mono uppercase mb-2 flex items-center gap-1.5 font-semibold">
                       <ShieldAlert className="w-3 h-3" /> Invalidation Level
                     </p>
-                    <p className="font-mono text-2xl text-red-400">
+                    <p className="font-mono text-2xl text-rose-600 font-bold">
                       ${data.contract.invalidation_level.toFixed(2)}
                     </p>
                   </div>
                   
-                  <div className="bg-background border border-border p-4 rounded flex flex-col justify-center">
-                    <p className="text-[10px] text-gray-500 font-mono uppercase mb-2 flex items-center gap-1.5">
+                  <div className="bg-white border border-slate-200 p-4 rounded-xl flex flex-col justify-center shadow-sm">
+                    <p className="text-[10px] text-slate-500 font-mono uppercase mb-2 flex items-center gap-1.5 font-semibold">
                       Calibration Score
                     </p>
-                    <p className="font-mono text-2xl text-white">
+                    <p className="font-mono text-2xl text-slate-700 font-bold">
                       {data.contract.calibration_score.toFixed(2)}
                     </p>
                   </div>
                 </div>
                 
                 {/* Expandable Evidence Ledger */}
-                <div className="border border-border rounded overflow-hidden">
+                <div className="border border-slate-200 rounded-xl overflow-hidden shadow-sm">
                   <button 
                     onClick={() => setShowEvidence(!showEvidence)}
-                    className="w-full bg-[#1A2332] p-3 flex items-center justify-between text-xs font-mono text-gray-400 hover:text-white transition-colors"
+                    className="w-full bg-slate-50 p-3 flex items-center justify-between text-xs font-mono text-slate-500 hover:text-blue-600 transition-colors font-semibold"
                   >
                     <span className="uppercase tracking-widest flex items-center gap-2">
                       View Evidence Ledger
@@ -301,27 +301,27 @@ export default function Home() {
                   </button>
                   
                   {showEvidence && (
-                    <div className="p-4 bg-background border-t border-border grid grid-cols-1 md:grid-cols-2 gap-6 animate-in fade-in slide-in-from-top-2">
+                    <div className="p-4 bg-white border-t border-slate-200 grid grid-cols-1 md:grid-cols-2 gap-6 animate-in fade-in slide-in-from-top-2">
                       <div>
-                        <h4 className="text-[10px] font-mono text-primary uppercase mb-3 flex items-center gap-2">
-                          <div className="w-1 h-1 bg-primary rounded-full"></div> Positive Catalysts
+                        <h4 className="text-[10px] font-mono text-emerald-600 uppercase mb-3 flex items-center gap-2 font-bold tracking-wider">
+                          <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full"></div> Positive Catalysts
                         </h4>
                         <ul className="space-y-2">
                           {data.contract.catalysts.map((cat, i) => (
-                            <li key={i} className="text-xs text-gray-300 font-mono flex items-start gap-2">
-                              <span className="text-primary mt-0.5">›</span> {cat}
+                            <li key={i} className="text-xs text-slate-600 font-mono flex items-start gap-2">
+                              <span className="text-emerald-500 mt-0.5">›</span> {cat}
                             </li>
                           ))}
                         </ul>
                       </div>
                       <div>
-                        <h4 className="text-[10px] font-mono text-red-400 uppercase mb-3 flex items-center gap-2">
-                          <div className="w-1 h-1 bg-red-400 rounded-full"></div> Risk Flags
+                        <h4 className="text-[10px] font-mono text-rose-500 uppercase mb-3 flex items-center gap-2 font-bold tracking-wider">
+                          <div className="w-1.5 h-1.5 bg-rose-500 rounded-full"></div> Risk Flags
                         </h4>
                         <ul className="space-y-2">
                           {data.contract.risk_flags.map((flag, i) => (
-                            <li key={i} className="text-xs text-gray-300 font-mono flex items-start gap-2">
-                              <AlertTriangle className="w-3 h-3 text-red-400 mt-0.5 shrink-0" /> {flag}
+                            <li key={i} className="text-xs text-slate-600 font-mono flex items-start gap-2">
+                              <AlertTriangle className="w-3 h-3 text-rose-500 mt-0.5 shrink-0" /> {flag}
                             </li>
                           ))}
                         </ul>
@@ -333,37 +333,37 @@ export default function Home() {
               </div>
 
               {/* Chart Visualizer */}
-              <div className="bg-surface rounded border border-border p-6 mb-6">
-                 <h3 className="text-xs font-mono text-gray-500 mb-4 tracking-widest uppercase flex items-center gap-2">
-                  <div className="w-1 h-3 bg-gray-600"></div>
+              <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 mb-6">
+                 <h3 className="text-xs font-mono text-slate-500 mb-4 tracking-widest uppercase flex items-center gap-2 font-semibold">
+                  <div className="w-1 h-3 bg-blue-500 rounded-full"></div>
                   Price Projection
                 </h3>
                 <ChartVisualizer data={data.data} />
               </div>
               
               {/* Raw Data Table */}
-              <div className="bg-surface rounded border border-border p-6">
-                <h3 className="text-xs font-mono text-gray-500 mb-6 tracking-widest uppercase flex items-center gap-2">
-                  <div className="w-1 h-3 bg-gray-600"></div>
+              <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-6">
+                <h3 className="text-xs font-mono text-slate-500 mb-6 tracking-widest uppercase flex items-center gap-2 font-semibold">
+                  <div className="w-1 h-3 bg-blue-500 rounded-full"></div>
                   Forecast Matrix
                 </h3>
                 <div className="overflow-x-auto">
                   <table className="w-full text-left border-collapse text-sm font-mono">
                     <thead>
-                      <tr className="border-b border-border text-gray-500">
-                        <th className="pb-3 pr-4 font-normal text-xs uppercase tracking-wider">Date</th>
-                        <th className="pb-3 pr-4 font-normal text-xs uppercase tracking-wider text-right">Target Price</th>
-                        <th className="pb-3 pr-4 font-normal text-xs uppercase tracking-wider text-right text-red-400/80">Lower Bound (-80%)</th>
-                        <th className="pb-3 pr-4 font-normal text-xs uppercase tracking-wider text-right text-primary/80">Upper Bound (+80%)</th>
+                      <tr className="border-b border-slate-200 text-slate-500">
+                        <th className="pb-3 pr-4 font-semibold text-[10px] uppercase tracking-wider">Date</th>
+                        <th className="pb-3 pr-4 font-semibold text-[10px] uppercase tracking-wider text-right">Target Price</th>
+                        <th className="pb-3 pr-4 font-semibold text-[10px] uppercase tracking-wider text-right text-rose-500">Lower Bound (-80%)</th>
+                        <th className="pb-3 pr-4 font-semibold text-[10px] uppercase tracking-wider text-right text-emerald-500">Upper Bound (+80%)</th>
                       </tr>
                     </thead>
                     <tbody>
                       {data.data.filter((d) => d.is_forecast).slice(0, 5).map((row, i) => (
-                        <tr key={i} className="border-b border-border/50 hover:bg-white/5 transition-colors">
-                          <td className="py-3 pr-4 text-gray-400">{row.date}</td>
-                          <td className="py-3 pr-4 text-right text-white font-bold">${row.price.toFixed(2)}</td>
-                          <td className="py-3 pr-4 text-right text-red-400/90">${row.lower_bound?.toFixed(2)}</td>
-                          <td className="py-3 pr-4 text-right text-primary/90">${row.upper_bound?.toFixed(2)}</td>
+                        <tr key={i} className="border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                          <td className="py-3 pr-4 text-slate-500">{row.date}</td>
+                          <td className="py-3 pr-4 text-right text-slate-800 font-bold">${row.price.toFixed(2)}</td>
+                          <td className="py-3 pr-4 text-right text-rose-500 font-medium">${row.lower_bound?.toFixed(2)}</td>
+                          <td className="py-3 pr-4 text-right text-emerald-500 font-medium">${row.upper_bound?.toFixed(2)}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -372,11 +372,11 @@ export default function Home() {
               </div>
             </div>
           ) : (
-            <div className="h-[500px] w-full border border-border border-dashed rounded flex flex-col items-center justify-center text-gray-600 font-mono">
-              <div className="bg-border/30 p-4 rounded mb-4">
-                <Search className="w-6 h-6 text-gray-500" />
+            <div className="h-[500px] w-full bg-white/50 border border-slate-200 border-dashed rounded-2xl flex flex-col items-center justify-center text-slate-500 font-mono shadow-sm">
+              <div className="bg-slate-100 p-4 rounded-xl mb-4">
+                <Search className="w-6 h-6 text-slate-400" />
               </div>
-              <p className="text-xs uppercase tracking-widest">Awaiting query parameters.</p>
+              <p className="text-xs uppercase tracking-widest font-semibold">Awaiting query parameters.</p>
             </div>
           )}
         </div>

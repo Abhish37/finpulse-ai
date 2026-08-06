@@ -46,23 +46,23 @@ export default function Auth({ onAuthSuccess }: { onAuthSuccess: () => void }) {
   };
 
   return (
-    <div className="bg-[#1A2332] border border-border p-6 w-full max-w-sm rounded flex flex-col justify-center">
+    <div className="bg-white/80 backdrop-blur-xl border border-slate-200 shadow-sm p-6 w-full max-w-sm rounded-xl flex flex-col justify-center">
       <div className="text-left mb-6">
-        <h3 className="text-lg font-mono text-white tracking-tight uppercase">{isLogin ? 'OPERATOR LOGIN' : 'NEW OPERATOR ACCESS'}</h3>
-        <p className="text-xs font-mono text-gray-500 mt-1 uppercase tracking-widest">{isLogin ? 'Authenticate to access intelligence' : 'Request FinPulse Clearance'}</p>
+        <h3 className="text-lg font-mono font-bold text-slate-800 tracking-tight uppercase">{isLogin ? 'OPERATOR LOGIN' : 'NEW OPERATOR ACCESS'}</h3>
+        <p className="text-[10px] font-mono text-slate-500 mt-1 uppercase tracking-widest font-semibold">{isLogin ? 'Authenticate to access intelligence' : 'Request FinPulse Clearance'}</p>
       </div>
       
-      {error && <div className="text-red-500 bg-red-500/10 text-xs font-mono mb-4 border border-red-500/30 p-3 rounded">{error}</div>}
+      {error && <div className="text-rose-600 bg-rose-50 text-xs font-mono mb-4 border border-rose-200 p-3 rounded-lg font-medium">{error}</div>}
       
       {successMsg ? (
         <div className="flex flex-col items-center justify-center py-6 text-center">
-          <div className="bg-primary/20 p-3 rounded mb-4 text-primary">
-            <MailCheck size={24} />
+          <div className="bg-blue-50 p-4 rounded-full mb-4 text-blue-600">
+            <MailCheck size={28} />
           </div>
-          <p className="text-primary font-mono text-sm px-4 uppercase">{successMsg}</p>
+          <p className="text-blue-700 font-mono text-sm px-4 uppercase font-bold">{successMsg}</p>
           <button 
             onClick={() => { setIsLogin(true); setSuccessMsg(null); }}
-            className="mt-6 text-xs text-gray-400 hover:text-white font-mono uppercase tracking-widest border border-border px-4 py-2 rounded hover:bg-border transition-colors"
+            className="mt-6 text-[10px] text-slate-500 hover:text-blue-600 font-mono uppercase tracking-widest border border-slate-200 px-4 py-2.5 rounded-lg hover:bg-slate-50 transition-colors font-bold"
           >
             Acknowledge & Return
           </button>
@@ -70,31 +70,31 @@ export default function Auth({ onAuthSuccess }: { onAuthSuccess: () => void }) {
       ) : (
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 font-mono">
           <div>
-            <label className="block text-[10px] text-gray-500 mb-1 tracking-widest uppercase">Operator Email</label>
+            <label className="block text-[10px] text-slate-500 mb-1 tracking-widest uppercase font-semibold ml-1">Operator Email</label>
             <input 
               type="email" 
               placeholder="name@institution.com" 
               value={email}
               onChange={e => setEmail(e.target.value)}
-              className="bg-[#090D16] border border-border px-4 py-2.5 rounded w-full text-white focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-xs"
+              className="bg-white border border-slate-200 px-4 py-2.5 rounded-lg w-full text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-xs shadow-sm placeholder:text-slate-400"
               required
             />
           </div>
           <div>
-            <label className="block text-[10px] text-gray-500 mb-1 tracking-widest uppercase">Clearance Code</label>
+            <label className="block text-[10px] text-slate-500 mb-1 tracking-widest uppercase font-semibold ml-1">Clearance Code</label>
             <input 
               type="password" 
               placeholder="••••••••" 
               value={password}
               onChange={e => setPassword(e.target.value)}
-              className="bg-[#090D16] border border-border px-4 py-2.5 rounded w-full text-white focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all text-xs"
+              className="bg-white border border-slate-200 px-4 py-2.5 rounded-lg w-full text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-xs shadow-sm placeholder:text-slate-400"
               required
             />
           </div>
           <button 
             type="submit" 
             disabled={loading}
-            className="bg-primary text-[#090D16] font-bold py-2.5 rounded hover:bg-primary-hover disabled:opacity-70 transition-all mt-2 flex justify-center items-center h-[40px] text-xs uppercase tracking-widest"
+            className="bg-blue-600 text-white font-bold py-2.5 rounded-lg hover:bg-blue-700 disabled:opacity-70 transition-all mt-2 flex justify-center items-center h-[42px] text-xs uppercase tracking-widest shadow-md hover:shadow-lg"
           >
             {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : (isLogin ? 'Execute Login' : 'Initialize Request')}
           </button>
@@ -102,8 +102,8 @@ export default function Auth({ onAuthSuccess }: { onAuthSuccess: () => void }) {
       )}
       
       {!successMsg && (
-        <div className="mt-6 text-center text-xs font-mono text-gray-500">
-          <button onClick={() => { setIsLogin(!isLogin); setError(null); }} className="hover:text-primary transition-colors tracking-widest uppercase">
+        <div className="mt-6 text-center text-[10px] font-mono text-slate-500 font-semibold">
+          <button onClick={() => { setIsLogin(!isLogin); setError(null); }} className="hover:text-blue-600 transition-colors tracking-widest uppercase">
             {isLogin ? "No clearance? Request Access" : 'Have clearance? Execute Login'}
           </button>
         </div>
