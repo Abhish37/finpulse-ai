@@ -120,8 +120,14 @@ export default function Home() {
       alert(`Added ${data.ticker} to Watchlist`);
     } catch (err: unknown) {
       console.error(err);
-      const errorMessage = err instanceof Error ? err.message : 'Unknown error';
-      alert(`Failed to add to watchlist: ${errorMessage}`);
+      let errorMessage = 'Unknown error';
+      if (typeof err === 'object' && err !== null && 'message' in err) {
+        errorMessage = String((err as any).message);
+      } else if (err instanceof Error) {
+        errorMessage = err.message;
+      }
+      
+      alert(`Database Error: ${errorMessage}\n\nPlease go to your Supabase SQL Editor and run the CREATE TABLE watchlists script!`);
     }
   };
 
