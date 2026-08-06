@@ -11,8 +11,9 @@ import {
   Tooltip,
   ResponsiveContainer
 } from 'recharts';
+import { PredictionDataPoint } from '@/lib/types';
 
-export default function ChartVisualizer({ data }: { data: any[] }) {
+export default function ChartVisualizer({ data }: { data: PredictionDataPoint[] }) {
   if (!data || data.length === 0) {
     return (
       <div className="h-64 w-full flex items-center justify-center border border-border bg-surface text-gray-500">
