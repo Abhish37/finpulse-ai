@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+pydantic
+pydantic-settings
+yfinance
+pandas
+numpy
+onnxruntime
+upstash-redis
+python-dotenv
+pyjwt
