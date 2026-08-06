@@ -16,47 +16,49 @@ import { PredictionDataPoint } from '@/lib/types';
 export default function ChartVisualizer({ data }: { data: PredictionDataPoint[] }) {
   if (!data || data.length === 0) {
     return (
-      <div className="h-64 w-full flex items-center justify-center bg-slate-50 border border-slate-100 rounded-xl text-slate-400 font-medium">
-        No chart data available.
+      <div className="h-64 w-full flex items-center justify-center border border-border bg-[#090D16] text-gray-500 font-mono text-xs">
+        NO CHART DATA
       </div>
     );
   }
 
   return (
-    <div className="w-full h-80 bg-white pt-4">
+    <div className="w-full h-80 bg-[#090D16] pt-4 rounded border border-border overflow-hidden">
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
           <defs>
             <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#3B82F6" stopOpacity={0.1}/>
-              <stop offset="95%" stopColor="#3B82F6" stopOpacity={0}/>
+              <stop offset="5%" stopColor="#10B981" stopOpacity={0.1}/>
+              <stop offset="95%" stopColor="#10B981" stopOpacity={0}/>
             </linearGradient>
             <linearGradient id="colorBand" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#93C5FD" stopOpacity={0.2}/>
-              <stop offset="95%" stopColor="#93C5FD" stopOpacity={0.05}/>
+              <stop offset="5%" stopColor="#10B981" stopOpacity={0.2}/>
+              <stop offset="95%" stopColor="#10B981" stopOpacity={0.05}/>
             </linearGradient>
           </defs>
-          <CartesianGrid strokeDasharray="3 3" stroke="#F1F5F9" vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="#1F2937" vertical={false} />
           <XAxis 
             dataKey="date" 
-            stroke="#94A3B8" 
-            fontSize={11} 
+            stroke="#4B5563" 
+            fontSize={10} 
+            fontFamily="monospace"
             tickMargin={10}
             minTickGap={30}
             axisLine={false}
             tickLine={false}
           />
           <YAxis 
-            stroke="#94A3B8" 
-            fontSize={11} 
+            stroke="#4B5563" 
+            fontSize={10} 
+            fontFamily="monospace"
             domain={['auto', 'auto']}
             axisLine={false}
             tickLine={false}
             tickFormatter={(value) => `$${value}`}
           />
           <Tooltip 
-            contentStyle={{ backgroundColor: '#ffffff', borderColor: '#E2E8F0', borderRadius: '12px', boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)', color: '#1E293B', fontWeight: 600, fontSize: '13px' }}
-            itemStyle={{ color: '#3B82F6' }}
+            contentStyle={{ backgroundColor: '#111827', borderColor: '#1F2937', color: '#F3F4F6', fontFamily: 'monospace', fontSize: '12px' }}
+            itemStyle={{ color: '#10B981' }}
           />
           
           {/* Confidence Band Area */}
@@ -71,7 +73,7 @@ export default function ChartVisualizer({ data }: { data: PredictionDataPoint[] 
             type="monotone" 
             dataKey="lower_bound" 
             stroke="none" 
-            fill="#ffffff" 
+            fill="#090D16" 
             isAnimationActive={true}
           />
 
@@ -79,11 +81,11 @@ export default function ChartVisualizer({ data }: { data: PredictionDataPoint[] 
           <Line 
             type="monotone" 
             dataKey="price" 
-            stroke="#3B82F6" 
-            strokeWidth={3}
+            stroke="#10B981" 
+            strokeWidth={2}
             dot={false}
             isAnimationActive={true}
-            activeDot={{ r: 6, fill: "#2563EB", stroke: "#ffffff", strokeWidth: 2 }}
+            activeDot={{ r: 4, fill: "#059669", stroke: "#111827", strokeWidth: 2 }}
           />
         </ComposedChart>
       </ResponsiveContainer>

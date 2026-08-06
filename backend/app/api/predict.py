@@ -27,10 +27,29 @@ class PredictionDataPoint(BaseModel):
     lower_bound: Optional[float] = None
     upper_bound: Optional[float] = None
 
+class ForecastContract(BaseModel):
+    asset: str
+    issued_at: str
+    horizon: str
+    state: str
+    probability_up: float
+    probability_down: float
+    probability_neutral: float
+    expected_return: float
+    prediction_interval_80: List[float]
+    regime: str
+    invalidation_level: float
+    catalysts: List[str]
+    risk_flags: List[str]
+    confidence: str
+    calibration_score: float
+    expiry: str
+
 class PredictionResponse(BaseModel):
     ticker: str
     model_used: str
     metrics: dict
+    contract: ForecastContract
     data: List[PredictionDataPoint]
 
 @router.get("/predict/{ticker}", response_model=PredictionResponse)

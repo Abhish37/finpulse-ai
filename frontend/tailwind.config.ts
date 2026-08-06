@@ -9,13 +9,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        background: "#F8FAFC", // Soft Slate 50
-        surface: "#FFFFFF",
-        border: "#E2E8F0", // Slate 200
+        background: "#090D16", // Bloomberg Charcoal
+        surface: "#111827", // Gray 900
+        border: "#1F2937", // Gray 800
         primary: {
-          DEFAULT: "#3B82F6", // Blue 500
-          hover: "#2563EB", // Blue 600
-          light: "#DBEAFE", // Blue 100
+          DEFAULT: "#10B981", // Emerald 500
+          hover: "#059669", // Emerald 600
+          light: "#D1FAE5", // Emerald 100
         },
         accent: {
           up: "#10B981",
@@ -25,11 +25,11 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["Inter", "ui-sans-serif", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "sans-serif"],
-        mono: ["JetBrains Mono", "Geist Mono", "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"],
+        mono: ["Geist Mono", "JetBrains Mono", "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "monospace"],
       },
       boxShadow: {
-        'soft': '0 10px 40px -10px rgba(59, 130, 246, 0.1)',
-        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+        'soft': '0 10px 40px -10px rgba(0, 0, 0, 0.5)',
+        'card': '0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2)',
       }
     },
   },

@@ -6,14 +6,12 @@
 
 @layer base {
   body {
-    @apply bg-background text-slate-800 font-sans antialiased;
-    /* Soft white/blue radial gradient background */
-    background-image: radial-gradient(circle at 50% 0%, #E0F2FE 0%, #F8FAFC 50%);
-    background-attachment: fixed;
+    @apply bg-background text-gray-200 font-sans antialiased;
+    background-color: #090D16;
   }
 }
 
-/* Modern clean scrollbars */
+/* Modern dark scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -22,9 +20,9 @@
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #CBD5E1;
+  background: #1F2937;
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94A3B8;
+  background: #374151;
 }

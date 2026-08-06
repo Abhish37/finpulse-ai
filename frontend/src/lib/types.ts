@@ -10,9 +10,29 @@ export interface PredictionMetrics {
   historical_volatility: number;
 }
 
+export interface ForecastContract {
+  asset: string;
+  issued_at: string;
+  horizon: string;
+  state: string;
+  probability_up: number;
+  probability_down: number;
+  probability_neutral: number;
+  expected_return: number;
+  prediction_interval_80: number[];
+  regime: string;
+  invalidation_level: number;
+  catalysts: string[];
+  risk_flags: string[];
+  confidence: string;
+  calibration_score: number;
+  expiry: string;
+}
+
 export interface PredictionResponse {
   ticker: string;
   model_used: string;
   metrics: PredictionMetrics;
+  contract: ForecastContract;
   data: PredictionDataPoint[];
 }
