@@ -208,12 +208,22 @@ export default function Home() {
         
         {/* Top Header & Search Bar */}
         <div className="w-full bg-white/80 backdrop-blur-md border-b border-slate-200 p-4 flex flex-col md:flex-row justify-between items-center gap-4 shadow-sm z-20">
-          <div className="flex items-center gap-4 w-full md:w-auto">
+          <div className="flex items-center gap-4 w-full md:w-auto justify-between md:justify-start">
             <h1 className="text-xl font-bold md:hidden text-slate-800 flex items-center gap-2">
               <span className="w-6 h-6 rounded bg-blue-600 flex items-center justify-center text-white text-xs">F</span>
               FinPulse
             </h1>
-            <ModeToggle isLaymanMode={isLaymanMode} setIsLaymanMode={setIsLaymanMode} />
+            <div className="flex items-center gap-2">
+              <ModeToggle isLaymanMode={isLaymanMode} setIsLaymanMode={setIsLaymanMode} />
+              {user && (
+                <button 
+                  onClick={handleSignOut} 
+                  className="md:hidden ml-2 bg-rose-50 text-rose-600 border border-rose-200 px-3 py-1.5 rounded-lg text-xs font-mono font-semibold shadow-sm flex items-center gap-1"
+                >
+                  <LogOut className="w-3 h-3" /> Fix Session
+                </button>
+              )}
+            </div>
           </div>
           
           <form onSubmit={(e) => handleSearch(e)} className="relative w-full md:max-w-md flex items-center group">
