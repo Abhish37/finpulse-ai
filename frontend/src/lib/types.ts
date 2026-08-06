@@ -32,7 +32,10 @@ export interface ForecastContract {
 export interface PredictionResponse {
   ticker: string;
   model_used: string;
-  metrics: PredictionMetrics;
-  contract: ForecastContract;
+  metrics: {
+    historical_volatility: number;
+  };
+  contract?: ForecastContract;
   data: PredictionDataPoint[];
+  cached_fallback?: boolean;
 }
