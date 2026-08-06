@@ -122,7 +122,7 @@ export default function Home() {
       console.error(err);
       let errorMessage = 'Unknown error';
       if (typeof err === 'object' && err !== null && 'message' in err) {
-        errorMessage = String((err as any).message);
+        errorMessage = String((err as Record<string, unknown>).message);
       } else if (err instanceof Error) {
         errorMessage = err.message;
       }
