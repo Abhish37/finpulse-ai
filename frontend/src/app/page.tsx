@@ -162,7 +162,7 @@ export default function Home() {
                 <Loader2 className="h-12 w-12 animate-spin text-primary/20" />
                 <Loader2 className="h-12 w-12 animate-spin text-primary absolute top-0 left-0" style={{ animationDirection: 'reverse', animationDuration: '2s' }} />
               </div>
-              <p className="text-sm font-semibold tracking-wide">Running Neural Network Inference...</p>
+              <p className="text-sm font-semibold tracking-wide">Running Neural Network Inference for {ticker}...</p>
             </div>
           ) : data ? (
             <div className="animate-in fade-in slide-in-from-bottom-4 duration-700 pb-16">
