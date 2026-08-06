@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .api import predict
+from .api import predict, sectors
 
 app = FastAPI(
     title="FinPulse AI Backend",
@@ -25,6 +25,7 @@ app.add_middleware(
 
 # Include Routers
 app.include_router(predict.router, prefix="/api/v1")
+app.include_router(sectors.router, prefix="/api/v1")
 
 @app.get("/health")
 async def health_check():

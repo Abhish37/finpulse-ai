@@ -89,5 +89,18 @@ async def get_prediction(
         return forecast_result
 
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        print(f"Prediction Error for {ticker}: {e}")
+        # Rate Limit Fallback: If yfinance fails, try to serve from Redis even if expired (if possible)
+        # For our current implementation, we just serve what we have if it exists.
+        if redis:
+            try:
+                cached_data = redis.get(cache_key)
+                if cached_data:
+                    data = json.loads(cached_data) if isinstance(cached_data, str) else cached_data
+                    data["cached_fallback"] = True
+                    return data
+            except Exception as redis_e:
+                pass
+        
+        raise HTTPException(status_code=500, detail=f"Failed to generate forecast: {str(e)}")
 

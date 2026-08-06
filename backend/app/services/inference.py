@@ -6,6 +6,15 @@ from datetime import timedelta
 
 SEQUENCE_LENGTH = 60
 
+def calculate_safe_expected_return(pred_return: float) -> float:
+    """
+    Ensures mathematical safety bounds so expected return never outputs impossible values (e.g. -106.4%).
+    """
+    # Absolute minimum stock price drop is -100% (-1.0).
+    # We clip log returns safely between -95% (-0.95) and +300% (+3.00).
+    clamped_return = float(np.clip(pred_return, -0.95, 3.00))
+    return clamped_return
+
 def run_prediction(ticker: str, hist_data: pd.DataFrame, horizon: int = 30) -> dict:
     """
     Runs ONNX inference to predict future log returns, reconstructs prices, 
@@ -89,7 +98,8 @@ def run_prediction(ticker: str, hist_data: pd.DataFrame, horizon: int = 30) -> d
     from datetime import datetime
     
     # 5. Generate TRD Forecast Contract
-    expected_return = sum(predicted_returns)
+    raw_expected_return = sum(predicted_returns)
+    expected_return = calculate_safe_expected_return(raw_expected_return)
     is_up = expected_return > 0
     prob_up = 0.61 if is_up else 0.27
     prob_down = 0.27 if is_up else 0.61
